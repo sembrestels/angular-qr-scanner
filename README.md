@@ -1,0 +1,2 @@
+angular-qr-scanner
+==================
