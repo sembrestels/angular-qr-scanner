@@ -52,6 +52,8 @@ App.directive('qrScanner', ['$timeout', function($timeout) {
       var height = attrs.height || 300;
       var width = attrs.width || 250;
       var localMediaStream;
+      var timeoutScan;
+      var timeoutSuccess;
     
       var video = document.createElement('video');
       video.setAttribute('width', width);
@@ -75,7 +77,7 @@ App.directive('qrScanner', ['$timeout', function($timeout) {
             scope.ngError({error: e});
           }
         }
-        $timeout(scan, 500);
+        timeoutScan = $timeout(scan, 500);
       }
 
       var successCallback = function(stream) {
@@ -83,7 +85,7 @@ App.directive('qrScanner', ['$timeout', function($timeout) {
         localMediaStream = stream;
 
         video.play();
-        $timeout(scan, 1000);
+        timeoutSuccess = $timeout(scan, 1000);
       }
 
       // Call the getUserMedia method with our callback functions
@@ -98,6 +100,11 @@ App.directive('qrScanner', ['$timeout', function($timeout) {
       qrcode.callback = function(data) {
         scope.ngSuccess({data: data});
       };
+
+      scope.$on('$destroy', function (event) {
+        $timeout.cancel(timeoutScan);
+        $timeout.cancel(timeoutSuccess);
+      });
     }
   }
 }]);
