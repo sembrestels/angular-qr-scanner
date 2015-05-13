@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" ng-app="App">
   <head>
     <meta charset="UTF-8">
     <title>Angular-qr-scanner demo by sembrestels</title>
@@ -19,7 +19,15 @@
     </section>
 
     <section class="main-content">
-      <p>This is an angular-qr-scanner demo.</p>
+
+      <h2>Demo</h2>
+      <p>Scan a QR code.</p>
+
+      <div ng-controller="qrCrtl">
+        <p><label>Data:</label> {{data}}</p>
+        <p><label>Error:</label> {{error}}</p>
+        <qr-scanner width="400" height="300" ng-success="onSuccess(data)" ng-error="onError(error)" />
+      </div>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/sembrestels/angular-qr-scanner">Angular-qr-scanner demo</a> is maintained by <a href="https://github.com/sembrestels">sembrestels</a>.</span>
@@ -29,7 +37,26 @@
 
     </section>
 
-  
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+<script src="bower_components/angular-qr-scanner/qr-scanner.js"></script>
+<script src="bower_components/angular-qr-scanner/src/jsqrcode-combined.min.js"></script>
+<script>
+
+var App = angular.module('App', ['qrScanner']);
+
+App.controller('qrCrtl', ['$scope', function($scope) {
+    $scope.onSuccess = function(data) {
+        $scope.data = data;
+    };
+    $scope.onError = function(error) {
+        $scope.error = error;
+    };
+    $scope.onVideoError = function(error) {
+        $scope.error = error;
+    };
+}]);
+
+</script>
   </body>
 </html>
 
