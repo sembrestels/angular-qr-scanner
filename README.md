@@ -10,6 +10,9 @@ Angular directive for a QR Scanner. It is the angular version of [html5-qrcode](
 ```
 
 ### Demo
+
+Check out the [live demo](http://sembrestels.github.io/angular-qr-scanner/).
+
 ```html
 <html ng-app="App">
 <body ng-controller="qrCrtl">
