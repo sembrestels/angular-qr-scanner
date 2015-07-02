@@ -23,6 +23,7 @@ angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$windo
       var width = attrs.width || 250;
     
       var video = $window.document.createElement('video');
+      video.setAttribute('autoplay', true);
       video.setAttribute('width', width);
       video.setAttribute('height', height);
       video.setAttribute('style', '-moz-transform:rotateY(-180deg);-webkit-transform:rotateY(-180deg);transform:rotateY(-180deg);');
