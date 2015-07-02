@@ -1,8 +1,3 @@
-if (require){
-  if (!angular) var angular = require('angular');
-  if (!qrcode) var qrcode = require('jsqrcode');
-}
-
 (function() {
 'use strict';
 
