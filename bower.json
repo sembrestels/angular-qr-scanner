@@ -6,7 +6,10 @@
     "Sem <sembrestels@riseup.net>"
   ],
   "description": "QR scanner angular directive",
-  "main": "./qr-scanner.js",
+  "main": [
+    "./qr-scanner.js",
+    "./src/jsqrcode-combined.min.js"
+  ],
   "keywords": [
     "angular",
     "qr",
