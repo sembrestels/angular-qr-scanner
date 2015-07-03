@@ -25,8 +25,6 @@ angular.module('qrScanner', [])
         video.setAttribute('height', height);
         var canvas = $window.document.createElement('canvas');
         canvas.setAttribute('id', 'qr-canvas');
-        canvas.setAttribute('width', width);
-        canvas.setAttribute('height', height);
         canvas.setAttribute('style', 'display:none;');
 
         angular.element(element).append(video);
@@ -36,6 +34,8 @@ angular.module('qrScanner', [])
 
         var scan = function() {
           if ($window.localMediaStream) {
+            canvas.setAttribute('width', angular.element(video)[0].videoWidth);
+            canvas.setAttribute('height', angular.element(video)[0].videoHeight);
             context.drawImage(video, 0, 0, angular.element(video)[0].videoWidth, angular.element(video)[0].videoHeight);
             try {
               qrcode.decode();
