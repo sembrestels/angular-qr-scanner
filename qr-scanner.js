@@ -76,7 +76,9 @@ angular.module('qrScanner', [])
             scope.ngSuccess({data: data});
           };
         };
-        startVideo(null);
+        if(typeof scope.ngVideoSource == 'undefined') {
+          startVideo(null);
+        }
 
         scope.$watch('ngVideoSource', function(newValue, oldValue) {
           if (typeof MediaStreamTrack === 'undefined' ||
