@@ -1,9 +1,10 @@
 {
   "name": "angular-qr-scanner",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/sembrestels/angular-qr-scanner",
   "authors": [
-    "Sem <sembrestels@riseup.net>"
+    "Sem <sembrestels@riseup.net>",
+    "Maxaille <maxaille@hotmail.fr>"
   ],
   "description": "QR scanner angular directive",
   "main": "./qr-scanner.js",
