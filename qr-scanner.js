@@ -22,8 +22,8 @@ angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$windo
       var height = attrs.height || 300;
       var width = attrs.width || 250;
 
-			var cheight = height < 500 ? 500 : height;
-			var cwidth = width < 500 ? 500 : width;
+      var cheight = height < 500 ? 500 : height;
+      var cwidth = width < 500 ? 500 : width;
 
       var video = $window.document.createElement('video');
       video.setAttribute('width', width);
