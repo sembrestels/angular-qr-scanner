@@ -1,12 +1,12 @@
-if (require) {
+if (require){
     if (!angular) var angular = require('angular');
     if (!qrcode) var qrcode = require('jsqrcode');
 }
 
-(function () {
+(function() {
     'use strict';
 
-    angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$window', '$timeout', function ($interval, $window, $timeout) {
+    angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$window', '$timeout', function($interval, $window, $timeout) {
         return {
             restrict: 'E',
             scope: {
@@ -14,7 +14,7 @@ if (require) {
                 ngError: '&ngError',
                 ngVideoError: '&ngVideoError'
             },
-            link: function (scope, element, attrs) {
+            link: function(scope, element, attrs) {
 
                 window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
                 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -37,18 +37,18 @@ if (require) {
                 var context = canvas.getContext('2d');
                 var stopScan;
 
-                var scan = function () {
+                var scan = function() {
                     if ($window.localMediaStream) {
-                        context.drawImage(video, 0, 0, 307, 250);
+                        context.drawImage(video, 0, 0, 307,250);
                         try {
                             qrcode.decode();
-                        } catch (e) {
-                            scope.ngError({ error: e });
+                        } catch(e) {
+                            scope.ngError({error: e});
                         }
                     }
                 }
 
-                var successCallback = function (stream) {
+                var successCallback = function(stream) {
                     video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
                     $window.localMediaStream = stream;
 
@@ -68,18 +68,18 @@ if (require) {
                         }
                     };
 
-                    navigator.getUserMedia(constraint, successCallback, function (e) {
-                        scope.ngVideoError({ error: e });
+                    navigator.getUserMedia(constraint, successCallback, function(e) {
+                        scope.ngVideoError({error: e});
                     });
                 } else {
-                    scope.ngVideoError({ error: 'Native web camera streaming (getUserMedia) not supported in this browser.' });
+                    scope.ngVideoError({error: 'Native web camera streaming (getUserMedia) not supported in this browser.'});
                 }
 
-                qrcode.callback = function (data) {
-                    scope.ngSuccess({ data: data });
+                qrcode.callback = function(data) {
+                    scope.ngSuccess({data: data});
                 };
 
-                element.bind('$destroy', function () {
+                element.bind('$destroy', function() {
                     if ($window.localMediaStream) {
                         $window.localMediaStream.getVideoTracks()[0].stop();
                     }
