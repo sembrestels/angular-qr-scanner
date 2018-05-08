@@ -6,7 +6,7 @@ if (require){
 (function() {
     'use strict';
 
-    angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$window', '$timeout', function($interval, $window, $timeout) {
+    angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$window', function($interval, $window) {
         return {
             restrict: 'E',
             scope: {
@@ -25,7 +25,9 @@ if (require){
                 var video = $window.document.createElement('video');
                 video.setAttribute('width', width);
                 video.setAttribute('height', height);
+                video.setAttribute('autoplay', true);
                 video.setAttribute('style', '-moz-transform:rotateY(-180deg);-webkit-transform:rotateY(-180deg);transform:rotateY(-180deg);');
+
                 var canvas = $window.document.createElement('canvas');
                 canvas.setAttribute('id', 'qr-canvas');
                 canvas.setAttribute('width', width);
@@ -49,15 +51,13 @@ if (require){
                 }
 
                 var successCallback = function(stream) {
-                    video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
+                    video.srcObject = stream;
                     $window.localMediaStream = stream;
 
                     scope.video = video;
 
-                    $timeout(function () {
-                        video.play();
-                        stopScan = $interval(scan, 500);
-                    });
+                    video.play();
+                    stopScan = $interval(scan, 500);
                 }
 
                 // Call the getUserMedia method with our callback functions
