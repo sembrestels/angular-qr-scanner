@@ -49,7 +49,11 @@ angular.module('qrScanner', ["ng"]).directive('qrScanner', ['$interval', '$windo
       }
 
       var successCallback = function(stream) {
-        video.srcObject = stream
+        try{
+        	video.srcObject = stream
+        }catch (error) {
+        	video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
+        }
         $window.localMediaStream = stream;
 
         scope.video = video;
